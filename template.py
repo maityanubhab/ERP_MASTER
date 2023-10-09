@@ -1,38 +1,44 @@
 import os
 
-# Define the project root directory
-project_root = "student_performance_review"
+# Define the main project directory
+main_project_dir = "student_performance_review"
+os.makedirs(main_project_dir)
 
-# Define the app names
-app_names = ["authentication", "core", "assignments", "courses", "communication"]
+# Define subdirectories and their contents
+subdirectories = [
+    "student_performance_review",
+    "apps",
+    "media",
+    "static",
+    "templates",
+]
 
-# Create the project root directory
-os.makedirs(project_root, exist_ok=True)
+# Create the main project directory and subdirectories
+for subdirectory in subdirectories:
+    os.makedirs(os.path.join(main_project_dir, subdirectory))
 
-# Create the project-level files
+# Define files within subdirectories
+files = {
+    "student_performance_review/": ["__init__.py", "settings.py", "urls.py", "wsgi.py"],
+    "apps/": ["__init__.py"],
+    "apps/authentication/": ["__init__.py"],
+    "apps/core/": ["__init__.py"],
+    "apps/assignments/": ["__init__.py"],
+    "apps/courses/": ["__init__.py"],
+    "apps/communication/": ["__init__.py"],
+    "media/": [],
+    "static/": [],
+    "templates/": [],
+}
+
+# Create files within subdirectories
+for directory, file_list in files.items():
+    for file_name in file_list:
+        with open(os.path.join(main_project_dir, directory, file_name), "w") as file:
+            pass  # Create an empty file
+
+# Create the main project files
 project_files = ["manage.py", "requirements.txt", ".gitignore", "README.md"]
-for file in project_files:
-    open(os.path.join(project_root, file), "w").close()
-
-# Create the project-level directories
-project_directories = ["media", "static", "templates"]
-for directory in project_directories:
-    os.makedirs(os.path.join(project_root, directory), exist_ok=True)
-
-# Create the main app directory
-os.makedirs(os.path.join(project_root, "apps"), exist_ok=True)
-
-# Create app directories and files
-for app_name in app_names:
-    app_dir = os.path.join(project_root, "apps", app_name)
-    os.makedirs(app_dir, exist_ok=True)
-
-    # Create app-specific files
-    app_files = ["__init__.py", "admin.py", "apps.py", "models.py", "tests.py", "views.py"]
-    for file_name in app_files:
-        open(os.path.join(app_dir, file_name), "w").close()
-
-    # Create app-specific directories
-    app_directories = ["migrations", "static", "templates"]
-    for directory_name in app_directories:
-        os.makedirs(os.path.join(app_dir, directory_name), exist_ok=True)
+for file_name in project_files:
+    with open(os.path.join(main_project_dir, file_name), "w") as file:
+        pass  # Create an empty file
